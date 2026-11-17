@@ -1,19 +1,19 @@
 
 :root {
     /* Background and surfaces */
-    --color-background: #191817;
-    --color-surface: #262321;
+    --color-background: #f8f5ef;
+    --color-surface: #ffffff;
 
     /* Accent colors */
-    --color-primary: #f08a61;
-    --color-primary-dark: #d96b43;
+    --color-primary: #c45d3a;
+    --color-primary-dark: #9e4329;
 
     /* Text colors */
-    --color-text: #f5f0e9;
-    --color-text-light: #c0b8ae;
+    --color-text: #292725;
+    --color-text-light: #716d67;
 
     /* Borders */
-    --color-border: #48413b;
+    --color-border: #e5ded4;
 
     /* Typography */
     --font-heading: Georgia, serif;
@@ -37,20 +37,18 @@
     --border-radius: 12px;
 
     /* Effects */
-    --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.3);
+    --shadow-card: 0 4px 18px rgba(41, 39, 37, 0.08);
     --transition: 0.3s ease;
 }
 
-
-
-/* Dark theme - Footer overrides */
+/* Warm light theme - Footer */
 
 body footer#footer.footer {
-    background-color: var(--color-surface);
-    color: var(--color-text);
+    background-color: var(--color-text);
+    color: var(--color-surface);
 }
 
 body footer#footer.footer .footer-links h3,
 body footer#footer.footer .footer-contact h3 {
-    color: var(--color-text);
+    color: var(--color-surface);
 }
