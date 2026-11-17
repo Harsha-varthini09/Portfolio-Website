@@ -1335,3 +1335,82 @@ section {
         right: 20px;
     }
 }
+
+
+/* =====================================
+   FAMILY - GROUP PHOTO BANNER
+===================================== */
+
+.family-banner {
+    position: relative;
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--space-section);
+    box-shadow: var(--shadow-card);
+}
+
+.family-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Dark overlay for readable text */
+
+.family-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0.1)
+    );
+}
+
+/* Banner text */
+
+.family-banner-content {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    z-index: 1;
+    max-width: 500px;
+    color: #ffffff;
+}
+
+.family-banner-content h2 {
+    font-family: var(--font-heading);
+    font-size: var(--heading-large);
+    margin-bottom: var(--space-medium);
+}
+
+.family-banner-content p {
+    font-size: var(--text-large);
+    line-height: 1.7;
+}
+
+/* Mobile responsive banner */
+
+@media (max-width: 768px) {
+    .family-banner {
+        height: 370px;
+    }
+
+    .family-banner-content {
+        left: 6%;
+        right: 6%;
+    }
+
+    .family-banner-content h2 {
+        font-size: 2rem;
+    }
+
+    .family-banner-content p {
+        font-size: var(--text-normal);
+    }
+}
