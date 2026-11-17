@@ -397,3 +397,126 @@ section {
     }
 }
 
+
+/* Interests Section */
+.interests {
+    background-color: var(--color-background);
+}
+
+.interests-grid {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-large);
+}
+
+.interest-card {
+    background-color: var(--color-surface);
+    padding: var(--space-large);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+}
+
+.interest-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(41, 39, 37, 0.12);
+}
+
+.interest-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-background);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    margin-bottom: var(--space-medium);
+}
+
+.interest-card h3 {
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-medium);
+}
+
+.interest-card h4 {
+    color: var(--color-primary);
+    font-size: var(--text-normal);
+    margin-top: var(--space-large);
+    margin-bottom: var(--space-small);
+}
+
+.interest-card p {
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin-bottom: var(--space-medium);
+}
+
+.interest-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.interest-card li {
+    color: var(--color-text-light);
+    line-height: 1.8;
+    padding-left: 18px;
+    position: relative;
+}
+
+.interest-card li::before {
+    content: "•";
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+}
+
+.interest-note {
+    margin-top: var(--space-medium);
+    font-size: var(--text-small);
+}
+
+
+/* Interests Section - Responsive */
+@media (max-width: 768px) {
+    .interests-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-small);
+        padding: 0 var(--space-small);
+    }
+
+    .interest-card {
+        padding: var(--space-medium);
+    }
+
+    .interest-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .interest-card h4 {
+        font-size: 0.9rem;
+    }
+
+    .interest-card p,
+    .interest-card li {
+        font-size: 0.85rem;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 520px) {
+    .interests-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 360px) {
+    .interests-grid {
+        grid-template-columns: 1fr;
+    }
+}
