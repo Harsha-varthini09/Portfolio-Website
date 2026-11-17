@@ -1,4 +1,77 @@
 
+
+// =====================================
+// NAVIGATION - MOBILE MENU
+// =====================================
+
+function initializeNavigation() {
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    if (!menuToggle || !navLinks) {
+        return;
+    }
+
+    // Open and close the mobile menu
+    menuToggle.addEventListener("click", function () {
+        const isOpen = navLinks.classList.toggle("active");
+
+        menuToggle.setAttribute("aria-expanded", isOpen);
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+        );
+    });
+
+    // Close the menu after selecting a navigation link
+    const navigationItems = navLinks.querySelectorAll("a");
+
+    navigationItems.forEach(function (link) {
+        link.addEventListener("click", function () {
+            navLinks.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Open navigation menu");
+        });
+    });
+
+    // Close the mobile menu when switching to desktop width
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > 768) {
+            navLinks.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Open navigation menu");
+        }
+    });
+}
+
+
+// =====================================
+// NAVIGATION - SMOOTH SCROLLING
+// =====================================
+
+function initializeSmoothScrolling() {
+    const navigationLinks = document.querySelectorAll(
+        '.navbar a[href^="#"]'
+    );
+
+    navigationLinks.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+            const targetId = link.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                event.preventDefault();
+
+                targetSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+    });
+}
+
+
 // =====================================
 // FOOTER - AUTOMATIC COPYRIGHT YEAR
 // =====================================
@@ -37,6 +110,8 @@ function initializeBackToTop() {
 // =====================================
 
 document.addEventListener("DOMContentLoaded", function () {
+    initializeNavigation();
+    initializeSmoothScrolling();
     updateCopyrightYear();
     initializeBackToTop();
 });
