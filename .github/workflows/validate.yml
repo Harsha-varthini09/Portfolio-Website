@@ -28,5 +28,5 @@ jobs:
       - name: Validate HTML using HTMLHint
         run: npx --yes htmlhint index.html
 
-      - name: Validate CSS using CSSLint
-        run: npx --yes csslint css/style.css css/theme.css
+      - name: Validate CSS using Stylelint
+        run: npx --yes --package stylelint --package stylelint-config-standard stylelint "css/**/*.css" --config .stylelintrc.json
