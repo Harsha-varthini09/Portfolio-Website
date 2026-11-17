@@ -117,6 +117,89 @@ function initializeJourneyToggle() {
 
 
 // =====================================
+// HOBBIES - IMAGE LIGHTBOX
+// =====================================
+
+function initializeHobbyLightbox() {
+    const lightbox = document.getElementById("hobby-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const closeButton = document.getElementById("lightbox-close");
+
+    const hobbyImages = document.querySelectorAll(".hobbies-grid img");
+
+    if (!lightbox || !lightboxImage || !closeButton) {
+        return;
+    }
+
+    // Open the lightbox
+    function openLightbox(image) {
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+
+        if (lightboxCaption) {
+            lightboxCaption.textContent = image.alt;
+        }
+
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+        closeButton.focus();
+    }
+
+    // Close the lightbox
+    function closeLightbox() {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+
+        lightboxImage.src = "";
+        document.body.style.overflow = "";
+    }
+
+    // Make hobby images clickable
+    hobbyImages.forEach(function (image) {
+        image.style.cursor = "pointer";
+        image.setAttribute("tabindex", "0");
+        image.setAttribute("role", "button");
+        image.setAttribute("aria-label", "View " + image.alt + " image");
+
+        image.addEventListener("click", function () {
+            openLightbox(image);
+        });
+
+        // Support keyboard interaction
+        image.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openLightbox(image);
+            }
+        });
+    });
+
+    // Close using the close button
+    closeButton.addEventListener("click", closeLightbox);
+
+    // Close when clicking outside the image
+    lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Close using the Escape key
+    document.addEventListener("keydown", function (event) {
+        if (
+            event.key === "Escape" &&
+            lightbox.classList.contains("active")
+        ) {
+            closeLightbox();
+        }
+    });
+}
+
+
+// =====================================
 // FOOTER - AUTOMATIC COPYRIGHT YEAR
 // =====================================
 
@@ -157,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeNavigation();
     initializeSmoothScrolling();
     initializeJourneyToggle();
+    initializeHobbyLightbox();
     updateCopyrightYear();
     initializeBackToTop();
 });
