@@ -1251,3 +1251,87 @@ section {
     display: none;
 }
 
+
+/* =====================================
+   HOBBIES - IMAGE LIGHTBOX
+===================================== */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    background-color: rgba(0, 0, 0, 0.85);
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    padding: var(--space-large);
+}
+
+/* Show lightbox when active */
+
+.lightbox.active {
+    display: flex;
+}
+
+/* Enlarged image */
+
+.lightbox img {
+    max-width: 85%;
+    max-height: 75vh;
+    object-fit: contain;
+
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+}
+
+/* Image caption */
+
+.lightbox p {
+    color: #ffffff;
+    font-size: var(--text-large);
+    margin-top: var(--space-medium);
+    text-align: center;
+}
+
+/* Close button */
+
+.lightbox-close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+
+    background: transparent;
+    border: none;
+
+    color: #ffffff;
+    font-size: 2.5rem;
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.lightbox-close:hover {
+    transform: scale(1.2);
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 768px) {
+    .lightbox {
+        padding: var(--space-medium);
+    }
+
+    .lightbox img {
+        max-width: 95%;
+        max-height: 65vh;
+    }
+
+    .lightbox-close {
+        top: 15px;
+        right: 20px;
+    }
+}
