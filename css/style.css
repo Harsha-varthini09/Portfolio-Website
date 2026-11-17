@@ -1210,3 +1210,44 @@ section {
         flex-shrink: 0;
     }
 }
+
+
+/* =====================================
+   JOURNEY - SHOW MORE BUTTON
+===================================== */
+
+.journey-toggle {
+    display: block;
+    margin: var(--space-large) auto 0;
+    padding: 12px 28px;
+
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+
+    border: none;
+    border-radius: var(--border-radius);
+
+    font-size: var(--text-normal);
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.journey-toggle:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-3px);
+}
+
+.journey-toggle:focus-visible {
+    outline: 3px solid var(--color-primary-dark);
+    outline-offset: 4px;
+}
+
+
+/* Hide additional journey cards */
+
+.journey-hidden {
+    display: none;
+}
+

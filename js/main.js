@@ -73,6 +73,50 @@ function initializeSmoothScrolling() {
 
 
 // =====================================
+// JOURNEY - SHOW MORE / SHOW LESS
+// =====================================
+
+function initializeJourneyToggle() {
+    const journeyContainer = document.querySelector(".journey-container");
+    const toggleButton = document.getElementById("journey-toggle");
+
+    if (!journeyContainer || !toggleButton) {
+        return;
+    }
+
+    const journeyCards = journeyContainer.querySelectorAll(".journey-card");
+
+    const visibleCards = 4;
+
+    // Hide cards after the first four
+    journeyCards.forEach(function (card, index) {
+        if (index >= visibleCards) {
+            card.classList.add("journey-hidden");
+        }
+    });
+
+    // Hide the button if there are four or fewer cards
+    if (journeyCards.length <= visibleCards) {
+        toggleButton.style.display = "none";
+        return;
+    }
+
+    toggleButton.addEventListener("click", function () {
+        const isExpanded = toggleButton.getAttribute("aria-expanded") === "true";
+
+        journeyCards.forEach(function (card, index) {
+            if (index >= visibleCards) {
+                card.classList.toggle("journey-hidden", isExpanded);
+            }
+        });
+
+        toggleButton.setAttribute("aria-expanded", String(!isExpanded));
+        toggleButton.textContent = isExpanded ? "Show More" : "Show Less";
+    });
+}
+
+
+// =====================================
 // FOOTER - AUTOMATIC COPYRIGHT YEAR
 // =====================================
 
@@ -112,6 +156,7 @@ function initializeBackToTop() {
 document.addEventListener("DOMContentLoaded", function () {
     initializeNavigation();
     initializeSmoothScrolling();
+    initializeJourneyToggle();
     updateCopyrightYear();
     initializeBackToTop();
 });
