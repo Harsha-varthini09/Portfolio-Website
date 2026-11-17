@@ -717,3 +717,123 @@ section {
         line-height: 1.6;
     }
 }
+
+
+/* =================================
+   HOBBIES SECTION
+================================= */
+
+.hobbies {
+    background-color: var(--color-background);
+}
+
+/* Hobbies Grid */
+
+.hobbies-grid {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-large);
+}
+
+/* Individual Hobby Card */
+
+.hobby-card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.hobby-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(41, 39, 37, 0.12);
+}
+
+/* Hobby Images */
+
+.hobby-image {
+    width: 100%;
+    height: 210px;
+    overflow: hidden;
+}
+
+.hobby-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.hobby-card:hover .hobby-image img {
+    transform: scale(1.08);
+}
+
+/* Hobby Content */
+
+.hobby-content {
+    padding: var(--space-large);
+}
+
+.hobby-content h3 {
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: var(--space-medium);
+}
+
+.hobby-content p {
+    color: var(--color-text-light);
+    font-size: var(--text-normal);
+    line-height: 1.8;
+}
+
+/* =================================
+   HOBBIES SECTION - TABLET
+================================= */
+
+@media (max-width: 768px) {
+    .hobbies-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-medium);
+        padding: 0 var(--space-medium);
+    }
+
+    .hobby-image {
+        height: 180px;
+    }
+
+    .hobby-content {
+        padding: var(--space-medium);
+    }
+
+    .hobby-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .hobby-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* =================================
+   HOBBIES SECTION - SMALL MOBILE
+================================= */
+
+@media (max-width: 480px) {
+    .hobbies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hobby-image {
+        height: 220px;
+    }
+
+    .hobby-content h3 {
+        font-size: 1.3rem;
+    }
+}
