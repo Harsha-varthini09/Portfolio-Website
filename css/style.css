@@ -162,18 +162,33 @@ section {
     transition: var(--transition);
 }
 
-/* Mobile navigation */
+/* Mobile navbar alignment */
 
 @media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 75px;
+    }
+
+    .logo {
+        margin-right: auto;
+        flex-shrink: 0;
+    }
+
     .menu-toggle {
         display: flex;
+        margin-left: auto;
+        flex-shrink: 0;
     }
 
     .nav-links {
         display: none;
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--space-medium);
         position: absolute;
         top: 100%;
         left: 0;
@@ -188,6 +203,7 @@ section {
         display: flex;
     }
 }
+
 
 /* ------------------------------
    4. Footer
@@ -1165,5 +1181,32 @@ section {
 
     .social-link {
         margin-bottom: var(--space-medium);
+    }
+}
+
+
+/* Fix mobile navigation alignment */
+
+@media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 80px;
+        padding: 12px 20px;
+    }
+
+    .navbar .logo {
+        margin: 0;
+        align-self: center;
+    }
+
+    .navbar .menu-toggle {
+        position: static;
+        margin: 0;
+        align-self: center;
+        transform: none;
+        flex-shrink: 0;
     }
 }
