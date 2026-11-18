@@ -101,7 +101,7 @@ Changes are pushed through pull requests instead of directly modifying the produ
 - **Email:** harshavarthini.eswaramurthy@psiog.com
 - **GitHub:** https://github.com/Harsha-varthini09
 - **LinkedIn:** Add your LinkedIn profile URL here.
-
+- **Slack url:** https://app.slack.com/client/T0CJU672KU4C0CJQ9GRBFC
 ---
 
 This project helped me practise front-end development, Git branching, pull requests, GitHub Actions, and automated deployment.
