@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  pr-validation:
-    name: Validate Pull Request
+  title-check:
+    name: Check HTML Title
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check HTML title tag
-        id: title
         run: |
           if grep -Eiq '<title[^>]*>[^<]+' index.html; then
             echo "HTML title tag found."
@@ -25,8 +24,15 @@ jobs:
             exit 1
           fi
 
+  image-alt-check:
+    name: Check Image Alt Attributes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Check image alt attributes
-        id: images
         run: |
           python3 - <<'PY'
           from html.parser import HTMLParser
@@ -57,8 +63,15 @@ jobs:
           print("All images have alt attributes.")
           PY
 
+  console-log-check:
+    name: Check Console Log Statements
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Check for console.log statements
-        id: console
         run: |
           if grep -RInE 'console\.log[[:space:]]*\(' js/ --include='*.js'; then
             echo "Error: Remove console.log statements before merging."
@@ -67,17 +80,26 @@ jobs:
             echo "No console.log statements found."
           fi
 
-      - name: Final PR validation summary
-        if: always()
-        run: |
-          echo "Pull Request validation completed."
-          echo "HTML title: ${{ steps.title.outcome }}"
-          echo "Image alt attributes: ${{ steps.images.outcome }}"
-          echo "Console log check: ${{ steps.console.outcome }}"
+  final-summary:
+    name: Final PR Validation Summary
+    needs:
+      - title-check
+      - image-alt-check
+      - console-log-check
+    if: always()
+    runs-on: ubuntu-latest
 
-          if [[ "${{ steps.title.outcome }}" != "success" ||
-                "${{ steps.images.outcome }}" != "success" ||
-                "${{ steps.console.outcome }}" != "success" ]]; then
+    steps:
+      - name: Display validation results
+        run: |
+          echo "Pull Request validation results:"
+          echo "HTML title: ${{ needs.title-check.result }}"
+          echo "Image alt attributes: ${{ needs.image-alt-check.result }}"
+          echo "Console log check: ${{ needs.console-log-check.result }}"
+
+          if [[ "${{ needs.title-check.result }}" != "success" ||
+                "${{ needs.image-alt-check.result }}" != "success" ||
+                "${{ needs.console-log-check.result }}" != "success" ]]; then
             echo "One or more PR checks failed."
             exit 1
           fi

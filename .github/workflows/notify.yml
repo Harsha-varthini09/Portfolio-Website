@@ -1,0 +1,43 @@
+name: Deployment Notification
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy Portfolio to GitHub Pages
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  notify:
+    name: Send Deployment Notification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify on Success
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
+        run: |
+          MESSAGE="Deployment successful! Portfolio is live at https://${REPOSITORY_OWNER}.github.io/${REPOSITORY_NAME}/"
+          PAYLOAD=$(jq -n --arg text "$MESSAGE" '{text: $text}')
+          curl -X POST \
+            -H "Content-type: application/json" \
+            --data "$PAYLOAD" \
+            "$SLACK_WEBHOOK_URL"
+
+      - name: Notify on Failure
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          REPOSITORY_NAME: ${{ github.repository }}
+        run: |
+          MESSAGE="Deployment FAILED! Please check the GitHub Actions tab in ${REPOSITORY_NAME}."
+          PAYLOAD=$(jq -n --arg text "$MESSAGE" '{text: $text}')
+          curl -X POST \
+            -H "Content-type: application/json" \
+            --data "$PAYLOAD" \
+            "$SLACK_WEBHOOK_URL"
