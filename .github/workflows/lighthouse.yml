@@ -1,4 +1,3 @@
-
 name: Lighthouse CI Audit
 
 on:
@@ -27,6 +26,8 @@ jobs:
     steps:
       - name: Run Lighthouse audit
         uses: treosh/lighthouse-ci-action@v12
+        env:
+          LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.event.workflow_run.head_sha }}
         with:
           urls: |
             https://harsha-varthini09.github.io/Portfolio-Website/
