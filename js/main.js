@@ -115,7 +115,44 @@ function initializeJourneyToggle() {
     });
 }
 
+// =====================================
+// JOURNEY - SCROLL REVEAL ANIMATION
+// =====================================
 
+function initializeJourneyAnimation() {
+    const journeyCards = document.querySelectorAll(".journey-card");
+
+    if (!journeyCards.length) {
+        return;
+    }
+
+    // Check whether the browser supports IntersectionObserver
+    if (!("IntersectionObserver" in window)) {
+        journeyCards.forEach(function (card) {
+            card.classList.add("is-visible");
+        });
+        return;
+    }
+
+    const observer = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    journeyCards.forEach(function (card, index) {
+        card.classList.add("journey-reveal");
+
+        // Observe only visible cards initially.
+        // Observe all cards, including initially hidden cards.
+    observer.observe(card);
+    });
+}
 // =====================================
 // HOBBIES - IMAGE LIGHTBOX
 // =====================================
@@ -240,6 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeNavigation();
     initializeSmoothScrolling();
     initializeJourneyToggle();
+    initializeJourneyAnimation();
     initializeHobbyLightbox();
     updateCopyrightYear();
     initializeBackToTop();

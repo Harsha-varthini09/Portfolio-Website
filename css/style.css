@@ -434,6 +434,28 @@ section {
     transform: translateY(-5px);
     box-shadow: 0 8px 24px rgba(41, 39, 37, 0.12);
 }
+/* Journey scroll reveal animation */
+
+.journey-card.journey-reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.journey-card.journey-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Respect users who prefer reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .journey-card.journey-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
 
 /* Card content */
 
